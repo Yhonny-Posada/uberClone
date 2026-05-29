@@ -111,7 +111,7 @@ const ProfileScreen = ({ navigation }) => {
 
       if (activeTab === 'Seguridad') {
         if (!validatePassword()) return;
-        // Aquí iría la lógica para actualizar contraseña en Firebase/Auth
+        
         setCurrentPass('');
         setNewPass('');
         setConfirmPass('');
@@ -126,7 +126,7 @@ const ProfileScreen = ({ navigation }) => {
     }
   };
 
-  // Eliminar cuenta
+  // Delete account
   const handleDeleteAccount = () => {
     Alert.alert(
       'Eliminar cuenta',
@@ -138,7 +138,7 @@ const ProfileScreen = ({ navigation }) => {
           style: 'destructive',
           onPress: async () => {
             try {
-              // Lógica para eliminar usuario en BD y Auth
+
               Alert.alert('Cuenta eliminada', 'Hasta luego.', [
                 { onPress: () => navigation.reset({ index: 0, routes: [{ name: 'Auth' }] }) }
               ]);
@@ -151,10 +151,10 @@ const ProfileScreen = ({ navigation }) => {
     );
   };
 
-  // Renderizado: Pestaña Información Personal
+  
   const renderPersonal = () => (
     <ScrollView contentContainerStyle={styles.tabContent}>
-      {/* Foto de perfil */}
+      
       <View style={styles.avatarContainer}>
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>
@@ -169,7 +169,7 @@ const ProfileScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Nombre completo */}
+
       <Text style={styles.label}>Nombre completo</Text>
       <TextInput
         style={[styles.input, errors.fullName && styles.inputError]}
@@ -185,7 +185,6 @@ const ProfileScreen = ({ navigation }) => {
       {errors.fullName && <Text style={styles.errorText}>{errors.fullName}</Text>}
       <Text style={styles.charCount}>{fullName.length}/50</Text>
 
-      {/* Celular */}
       <Text style={styles.label}>Número de celular</Text>
       <TextInput
         style={[styles.input, errors.phone && styles.inputError]}
@@ -200,7 +199,6 @@ const ProfileScreen = ({ navigation }) => {
       />
       {errors.phone && <Text style={styles.errorText}>{errors.phone}</Text>}
 
-      {/* Género */}
       <Text style={styles.label}>Género</Text>
       <TouchableOpacity
         style={[styles.input, styles.selectInput, errors.gender && styles.inputError]}
@@ -213,7 +211,6 @@ const ProfileScreen = ({ navigation }) => {
       </TouchableOpacity>
       {errors.gender && <Text style={styles.errorText}>{errors.gender}</Text>}
 
-      {/* Correo */}
       <Text style={styles.label}>Correo electrónico</Text>
       <TextInput
         style={[styles.input, errors.email && styles.inputError]}
@@ -229,7 +226,6 @@ const ProfileScreen = ({ navigation }) => {
       />
       {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 
-      {/* Idioma */}
       <Text style={styles.label}>Idioma</Text>
       <View style={styles.languageRow}>
         <TouchableOpacity
@@ -309,7 +305,7 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safe}>
-      {/* Encabezado */}
+
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation?.goBack()}>
           <Text style={styles.backBtn}>←</Text>
@@ -318,7 +314,6 @@ const ProfileScreen = ({ navigation }) => {
         <View style={styles.headerSpacer} />
       </View>
 
-      {/* Pestañas */}
       <View style={styles.tabBar}>
         {TABS.map(tab => (
           <TouchableOpacity
@@ -333,19 +328,16 @@ const ProfileScreen = ({ navigation }) => {
         ))}
       </View>
 
-      {/* Contenido según pestaña */}
       {activeTab === 'Personal' && renderPersonal()}
       {activeTab === 'Seguridad' && renderSecurity()}
       {activeTab === 'Preferencias' && renderPreferences()}
 
-      {/* Botón Guardar */}
       <View style={styles.footer}>
         <TouchableOpacity style={styles.saveBtn} onPress={handleSave}>
           <Text style={styles.saveBtnText}>Guardar cambios</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Modal Seleccionar Género */}
       <Modal
         visible={genderModalVisible}
         transparent
@@ -398,7 +390,7 @@ const styles = StyleSheet.create({
   backBtn: { color: COLORS.white, fontSize: 22 },
   headerTitle: { color: COLORS.white, fontSize: 18, fontWeight: 'bold' },
   headerSpacer: { width: 30 },
-  // Pestañas
+
   tabBar: {
     flexDirection: 'row',
     borderBottomWidth: 1,
@@ -408,9 +400,9 @@ const styles = StyleSheet.create({
   tabItemActive: { borderBottomWidth: 2, borderBottomColor: COLORS.green },
   tabText: { color: COLORS.gray, fontSize: 14 },
   tabTextActive: { color: COLORS.green, fontWeight: 'bold' },
-  // Contenido
+  
   tabContent: { padding: 16, paddingBottom: 40 },
-  // Avatar
+
   avatarContainer: { alignItems: 'center', marginBottom: 24 },
   avatar: {
     width: 80, height: 80, borderRadius: 40,
@@ -421,7 +413,7 @@ const styles = StyleSheet.create({
   avatarText: { color: COLORS.green, fontSize: 32, fontWeight: 'bold' },
   changePhotoBtn: { marginTop: 8 },
   changePhotoText: { color: COLORS.green, fontSize: 14 },
-  // Formulario
+
   label: { color: COLORS.gray, fontSize: 13, marginBottom: 6, marginTop: 12 },
   input: {
     backgroundColor: COLORS.inputBg,
@@ -436,12 +428,12 @@ const styles = StyleSheet.create({
   inputError: { borderColor: COLORS.red },
   errorText: { color: COLORS.red, fontSize: 12, marginTop: 4 },
   charCount: { color: COLORS.gray, fontSize: 11, textAlign: 'right', marginTop: 4 },
-  // Selector
+  
   selectInput: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   selectText: { color: COLORS.white, fontSize: 15 },
   selectPlaceholder: { color: COLORS.gray, fontSize: 15 },
   arrow: { color: COLORS.gray },
-  // Idioma
+
   languageRow: { flexDirection: 'row', marginTop: 4 },
   langBtn: {
     flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
@@ -454,7 +446,7 @@ const styles = StyleSheet.create({
   langFlag: { fontSize: 20, marginRight: 8 },
   langText: { color: COLORS.gray, fontSize: 14 },
   langTextActive: { color: COLORS.green, fontWeight: 'bold' },
-  // Preferencias
+
   prefRow: {
     flexDirection: 'row', justifyContent: 'space-between',
     paddingVertical: 16, borderBottomWidth: 1, borderBottomColor: COLORS.lightGray,
@@ -463,14 +455,14 @@ const styles = StyleSheet.create({
   prefValue: { color: COLORS.gray, fontSize: 15 },
   deleteBtn: { marginTop: 32, alignItems: 'center' },
   deleteBtnText: { color: COLORS.red, fontSize: 15 },
-  // Pie de página
+  
   footer: { padding: 16, borderTopWidth: 1, borderTopColor: COLORS.lightGray },
   saveBtn: {
     backgroundColor: COLORS.green, borderRadius: 30,
     paddingVertical: 16, alignItems: 'center',
   },
   saveBtnText: { color: COLORS.primary, fontSize: 16, fontWeight: 'bold' },
-  // Modal
+  
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'flex-end' },
   modalBox: {
     backgroundColor: COLORS.darkGray,
